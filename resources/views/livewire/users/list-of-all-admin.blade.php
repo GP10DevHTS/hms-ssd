@@ -37,6 +37,10 @@
                     </select>
                 </div>
 
+                <div class="mr-4">
+                    {{-- new user --}}
+                    @livewire('users.new-administrator', [], key('new-administrator-modal'))
+                </div>
 
             </div>
         </div>

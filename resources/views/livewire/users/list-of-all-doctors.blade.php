@@ -37,6 +37,11 @@
                     </select>
                 </div>
 
+                <div class="mr-4">
+                    {{-- new user --}}
+                    @livewire('users.new-doctor', [], key('new-doctor-modal'))
+                </div>
+
 
             </div>
         </div>

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('blood_group_id')->constrained()->nullable()->default(null);
+            $table->foreignId('blood_group_id')->nullable()->default(null)->constrained('blood_groups');
             $table->timestamps();
         });
     }
