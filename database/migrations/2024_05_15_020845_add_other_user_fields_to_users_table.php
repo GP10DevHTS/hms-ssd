@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('address')->nullable();
             $table->date('dob')->nullable();
-            $table->enumerate('gender', ['male', 'female', 'other'])->default('other');
+            $table->enum('gender', ['male', 'female', 'other'])->default('other');
             $table->string('phone')->nullable();
         });
     }

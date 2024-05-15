@@ -33,6 +33,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'address',
+        'dob',
+        'gender',
+        'phone',
     ];
 
     /**
@@ -64,4 +68,10 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function scopeSearch($query, $search)
+    {
+        return $query->where('name', 'like', '%' . $search . '%')
+            ->orWhere('email', 'like', '%' . $search . '%');
+    }
 }
