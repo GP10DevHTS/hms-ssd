@@ -7,6 +7,7 @@ use App\Livewire\Users\ListOfAllAdmin;
 use App\Livewire\Users\ListOfAllDoctors;
 use App\Livewire\Users\ListOfAllPatients;
 use App\Livewire\Users\RolesComponent;
+use App\Livewire\Users\UserProfile;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/users/list', ListOfAllAdmin::class)->name('users.index');
     Route::get('/users/doctors', ListOfAllDoctors::class)->name('users.doctors');
     Route::get('/users/patients', ListOfAllPatients::class)->name('users.patients');
+    Route::get('/user/{user}', UserProfile::class)->name('users.profile');
+    Route::get('/user/{user}/settings', UserProfile::class)->name('users.profile.settings');
 
     Route::fallback(function () {
         return view('pages/utility/404');

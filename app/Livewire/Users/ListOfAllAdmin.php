@@ -30,4 +30,12 @@ class ListOfAllAdmin extends Component
                 ->paginate($this->perPage)
         ]);
     }
+
+    public function openUserProfile($user_id)
+    {
+        $user = User::find($user_id);
+        if ($user) {
+            $this->redirectRoute('users.profile', ['user' => $user->id], navigate: true);
+        }
+    }
 }

@@ -74,4 +74,12 @@ class User extends Authenticatable
         return $query->where('name', 'like', '%' . $search . '%')
             ->orWhere('email', 'like', '%' . $search . '%');
     }
+
+    public function doctor(){
+        return $this->hasOne(Doctor::class);
+    }
+
+    public function patient(){
+        return $this->hasOne(Patient::class);
+    }
 }
