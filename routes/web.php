@@ -43,7 +43,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
 
     // Appointment Routes
-    // Route::get('/appointments/new', AppointmentNew::class)->name('appointments.new');
+    Route::get('/appointments/new', AppointmentNew::class)->name('appointments.new');
     // Route::get('/appointments/list', AppointmentList::class)->name('appointments.list');
     // Route::get('/appointments/{appointment}', AppointmentView::class)->name('appointments.view');
 

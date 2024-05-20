@@ -27,16 +27,11 @@
                             <textarea id="department_description" class="mt-1 block w-full form-textarea" wire:model.defer="department_description"
                                 rows="3"></textarea>
                             <x-input-error for="department_description" class="mt-2" />
+                        </div>
                     </x-slot>
-                    <x-slot name="actions">
-                        <x-secondary-button wire:click="$set('newDepartmentModal_isOpen', false)" wire:loading.attr="disabled">
-                            {{ __('Cancel') }}
-                        </x-secondary-button>
-        
-                        <x-button class="ms-3" wire:click="createDepartment" wire:loading.attr="disabled">
-                            {{ __('Create') }}
-                        </x-button>
-                    </x-slot>
+                    {{-- <x-slot name="actions">
+                        
+                    </x-slot> --}}
 
                 </x-form-section>
 
@@ -44,6 +39,13 @@
             </x-slot>
 
             <x-slot name="footer">
+                <x-secondary-button wire:click="$set('newDepartmentModal_isOpen', false)" wire:loading.attr="disabled">
+                    {{ __('Cancel') }}
+                </x-secondary-button>
+
+                <x-button class="ms-3" wire:click="createDepartment" wire:loading.attr="disabled">
+                    {{ __('Create') }}
+                </x-button>
             </x-slot>
 
         </x-dialog-modal>

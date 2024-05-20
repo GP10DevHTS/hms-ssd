@@ -145,7 +145,6 @@
                             <ul class="pl-9 mt-1 @if (!in_array(Request::segment(1), ['users'])) {{ 'hidden' }} @endif"
                                 :class="open ? '!block' : 'hidden'">
 
-
                                 <li class="mb-1 last:mb-0">
                                     <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('users.roles')) {{ '!text-indigo-500' }} @endif"
                                         href="{{ route('users.roles') }}">
@@ -221,47 +220,46 @@
                         </a>
                         <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
                             <ul class="pl-9 mt-1 @if (!in_array(Request::segment(1), ['appointments'])) {{ 'hidden' }} @endif"
-                                :class="open ? '!block' : 'hidden'">                            
+                                :class="open ? '!block' : 'hidden'">
                                 <li class="mb-1 last:mb-0">
                                     <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('appointments.available_slots')) {{ '!text-indigo-500' }} @endif"
                                         href="{{ route('appointments.available_slots') }}">
                                         <span
-                                            class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Available Slots</span>
+                                            class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Available
+                                            Slots</span>
                                     </a>
                                 </li>
-                                {{-- <li class="mb-1 last:mb-0">
-                                    <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('appointments.departments')) {{ '!text-indigo-500' }} @endif"
-                                        href="{{ route('appointments.departments') }}">
+
+                                <li class="mb-1 last:mb-0">
+                                    <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('appointments.new')) {{ '!text-indigo-500' }} @endif"
+                                        href="{{ route('appointments.new') }}">
                                         <span
-                                            class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Available Slots</span>
-                                </a>
-                            </li> --}}
-                                
-                            </ul>
-                        </div>
-                    {{-- </li> --}}
-
-                                
-
+                                            class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">New
+                                            Appointment</span>
+                                    </a>
+                                </li>
 
                             </ul>
                         </div>
-
-            </div>
-
-            <!-- Expand / collapse button -->
-            <div class="pt-3 hidden lg:inline-flex 2xl:hidden justify-end mt-auto">
-                <div class="px-3 py-2">
-                    <button @click="sidebarExpanded = !sidebarExpanded">
-                        <span class="sr-only">Expand / collapse sidebar</span>
-                        <svg class="w-6 h-6 fill-current sidebar-expanded:rotate-180" viewBox="0 0 24 24">
-                            <path class="text-slate-400"
-                                d="M19.586 11l-5-5L16 4.586 23.414 12 16 19.414 14.586 18l5-5H7v-2z" />
-                            <path class="text-slate-600" d="M3 23H1V1h2z" />
-                        </svg>
-                    </button>
-                </div>
+                    </li>
+                </ul>
             </div>
 
         </div>
+
+        <!-- Expand / collapse button -->
+        <div class="pt-3 hidden lg:inline-flex 2xl:hidden justify-end mt-auto">
+            <div class="px-3 py-2">
+                <button @click="sidebarExpanded = !sidebarExpanded">
+                    <span class="sr-only">Expand / collapse sidebar</span>
+                    <svg class="w-6 h-6 fill-current sidebar-expanded:rotate-180" viewBox="0 0 24 24">
+                        <path class="text-slate-400"
+                            d="M19.586 11l-5-5L16 4.586 23.414 12 16 19.414 14.586 18l5-5H7v-2z" />
+                        <path class="text-slate-600" d="M3 23H1V1h2z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
     </div>
+</div>
