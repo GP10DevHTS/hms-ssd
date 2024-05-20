@@ -10,6 +10,8 @@ use App\Livewire\Users\RolesComponent;
 use App\Livewire\Users\UserProfile;
 use App\Livewire\Appointment\AppointmentNew;
 use App\Livewire\Appointment\AppointmentSlots;
+use App\Livewire\Department\DepartmentsList;
+use App\Livewire\Department\NewDepartmentModal;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +47,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     // Route::get('/appointments/{appointment}', AppointmentView::class)->name('appointments.view');
 
     Route::get('/appointments/available_slots', AppointmentSlots::class)->name('appointments.available_slots');
+
+    // Department Routes
+    Route::get('/users/departments/list', DepartmentsList::class)->name('users.departments.list');
+    Route::get('/users/departments/new', NewDepartmentModal::class)->name('users.departments.new');
     
     Route::fallback(function () {
         return view('pages/utility/404');

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('patient_id'); 
             $table->foreignId('doctor_id');
+            $table->foreignId('department_id');
             $table->timestamp('start_time')->nullable();
             $table->integer('status')->default(0)->comment('0 - Pending, 1 - Confirmed, 2 - Cancelled');
             $table->string('reason')->nullable();

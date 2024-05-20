@@ -60,7 +60,6 @@ class ProfileSettingsPage extends Component
     }
     public function createAvailability(){
         $doctor_id = Doctor::where('user_id', $this->user->id)->first()->id;
-        // dd($doctor_id);
         $validatedData = $this->validate([
             'available_date' => 'required ',
             'available_time' => 'required ',
@@ -71,7 +70,6 @@ class ProfileSettingsPage extends Component
             'available_date' => $validatedData['available_date'],
             'available_time' => $validatedData['available_time'],
         ]);
-        // dd($appoint);
         noty()->addSuccess('Appointment created successfully');
     }
 }
