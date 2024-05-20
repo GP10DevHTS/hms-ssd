@@ -8,6 +8,8 @@ use App\Livewire\Users\ListOfAllDoctors;
 use App\Livewire\Users\ListOfAllPatients;
 use App\Livewire\Users\RolesComponent;
 use App\Livewire\Users\UserProfile;
+use App\Livewire\Appointment\AppointmentNew;
+use App\Livewire\Appointment\AppointmentSlots;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +38,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/user/{user}', UserProfile::class)->name('users.profile');
     Route::get('/user/{user}/settings', UserProfile::class)->name('users.profile.settings');
 
+
+    // Appointment Routes
+    // Route::get('/appointments/new', AppointmentNew::class)->name('appointments.new');
+    // Route::get('/appointments/list', AppointmentList::class)->name('appointments.list');
+    // Route::get('/appointments/{appointment}', AppointmentView::class)->name('appointments.view');
+
+    Route::get('/appointments/available_slots', AppointmentSlots::class)->name('appointments.available_slots');
+    
     Route::fallback(function () {
         return view('pages/utility/404');
     });

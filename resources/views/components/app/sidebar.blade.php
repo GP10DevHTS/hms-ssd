@@ -178,25 +178,76 @@
                         </div>
                     </li>
 
+                    {{-- Appointment Management --}}
+                    <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 @if (in_array(Request::segment(1), ['appointments'])) {{ 'bg-slate-900' }} @endif"
+                        x-data="{ open: {{ in_array(Request::segment(1), ['appointments']) ? 1 : 0 }} }">
+                        <a class="block text-slate-200 hover:text-white truncate transition duration-150 @if (in_array(Request::segment(1), ['appointments'])) {{ 'hover:text-slate-200' }} @endif"
+                            href="#0" @click.prevent="sidebarExpanded ? open = !open : sidebarExpanded = true">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        aria-hidden="true" role="img" width="16" height="16"
+                                        preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                                        <g fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="4" width="18" height="18" rx="2"
+                                                ry="2" />
+                                            <line x1="16" y1="2" x2="16" y2="6" />
+                                            <line x1="8" y1="2" x2="8" y2="6" />
+                                            <line x1="3" y1="10" x2="21" y2="10" />
+                                            <path d="M9 14l2 2l4-4" />
+                                        </g>
+                                    </svg>
 
-                </ul>
+                                    <span
+                                        class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Appointments</span>
+                                </div>
+                                <!-- Icon -->
+                                <div
+                                    class="flex shrink-0 ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                    <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 @if (in_array(Request::segment(1), ['users'])) {{ 'rotate-180' }} @endif"
+                                        :class="open ? 'rotate-180' : 'rotate-0'" viewBox="0 0 12 12">
+                                        <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                            <ul class="pl-9 mt-1 @if (!in_array(Request::segment(1), ['appointments'])) {{ 'hidden' }} @endif"
+                                :class="open ? '!block' : 'hidden'">
+
+                                <li class="mb-1 last:mb-0">
+                                    <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('appointments.available_slots')) {{ '!text-indigo-500' }} @endif"
+                                        href="{{ route('appointments.available_slots') }}">
+                                        <span
+                                            class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Available Slots</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    {{-- </li> --}}
+
+                                
+
+
+                            </ul>
+                        </div>
+
+            </div>
+
+            <!-- Expand / collapse button -->
+            <div class="pt-3 hidden lg:inline-flex 2xl:hidden justify-end mt-auto">
+                <div class="px-3 py-2">
+                    <button @click="sidebarExpanded = !sidebarExpanded">
+                        <span class="sr-only">Expand / collapse sidebar</span>
+                        <svg class="w-6 h-6 fill-current sidebar-expanded:rotate-180" viewBox="0 0 24 24">
+                            <path class="text-slate-400"
+                                d="M19.586 11l-5-5L16 4.586 23.414 12 16 19.414 14.586 18l5-5H7v-2z" />
+                            <path class="text-slate-600" d="M3 23H1V1h2z" />
+                        </svg>
+                    </button>
+                </div>
             </div>
 
         </div>
-
-        <!-- Expand / collapse button -->
-        <div class="pt-3 hidden lg:inline-flex 2xl:hidden justify-end mt-auto">
-            <div class="px-3 py-2">
-                <button @click="sidebarExpanded = !sidebarExpanded">
-                    <span class="sr-only">Expand / collapse sidebar</span>
-                    <svg class="w-6 h-6 fill-current sidebar-expanded:rotate-180" viewBox="0 0 24 24">
-                        <path class="text-slate-400"
-                            d="M19.586 11l-5-5L16 4.586 23.414 12 16 19.414 14.586 18l5-5H7v-2z" />
-                        <path class="text-slate-600" d="M3 23H1V1h2z" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-
     </div>
-</div>

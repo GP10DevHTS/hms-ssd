@@ -2,6 +2,9 @@
 
 namespace App\Livewire\Users;
 
+use App\Models\Appointment;
+use App\Models\Availability;
+use App\Models\Doctor;
 use App\Models\User;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
@@ -9,6 +12,9 @@ use Spatie\Permission\Models\Role;
 class ProfileSettingsPage extends Component
 {
     public $user;
+    public $available_date;
+    public $available_time;
+    public $doctor_id;
 
     public $selectedRoles = [];
 
@@ -51,5 +57,21 @@ class ProfileSettingsPage extends Component
         } catch (\Exception $e) {
             noty()->addError($e->getMessage());
         }
+    }
+    public function createAvailability(){
+        $doctor_id = Doctor::where('user_id', $this->user->id)->first()->id;
+        // dd($doctor_id);
+        $validatedData = $this->validate([
+            'available_date' => 'required ',
+            'available_time' => 'required ',
+        ]);
+
+        $appoint = Availability::create([
+            'doctor_id' => $doctor_id,
+            'available_date' => $validatedData['available_date'],
+            'available_time' => $validatedData['available_time'],
+        ]);
+        // dd($appoint);
+        noty()->addSuccess('Appointment created successfully');
     }
 }
