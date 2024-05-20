@@ -125,7 +125,7 @@ class AppointmentNew extends Component
             'reason' => $this->reason,
         ]);
 
-        session()->flash('message', 'Appointment successfully created.');
+        noty()->addSuccess('Appointment successfully created.');
 
         $this->reset();
         $this->bookAppointmentModal_isOpen = false;
