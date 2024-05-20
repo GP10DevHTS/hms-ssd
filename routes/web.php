@@ -12,6 +12,7 @@ use App\Livewire\Appointment\AppointmentNew;
 use App\Livewire\Appointment\AppointmentSlots;
 use App\Livewire\Department\DepartmentsList;
 use App\Livewire\Department\NewDepartmentModal;
+use App\Livewire\Appointment\AppointmentIndex;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     // Route::get('/appointments/{appointment}', AppointmentView::class)->name('appointments.view');
 
     Route::get('/appointments/available_slots', AppointmentSlots::class)->name('appointments.available_slots');
+    // Route::get('/appointments/departments', AppointmentIndex::class)->name('appointments.departments');
 
     // Department Routes
     Route::get('/users/departments/list', DepartmentsList::class)->name('users.departments.list');
