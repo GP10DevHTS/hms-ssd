@@ -27,7 +27,6 @@
             @endforelse
         </div>
 
-
         {{-- Card for assigning new roles --}}
         <div class="p-6 bg-white dark:bg-gray-800 shadow-md rounded-md border">
             <form wire:submit.prevent="updateUserRoles">
@@ -56,39 +55,41 @@
             </form>
         </div>
     </div>
-    <div class="mb-4">
-        <div
-            class="flex justify-between items-center  p-2 border m-2 bg-gray-100 dark:bg-gray-800 shadow-md rounded-md mt-6">
-            <h4>User Appointment Settings</h4>
-            <p class="text-sm text-gray-500 dark:text-gray-300">Edit user Availability settings</p>
+    @if (\App\Models\Doctor::where('user_id', auth()->user()->id)->exists())
+        <div class="mb-4">
+            <div
+                class="flex justify-between items-center  p-2 border m-2 bg-gray-100 dark:bg-gray-800 shadow-md rounded-md mt-6">
+                <h4>User Appointment Settings</h4>
+                <p class="text-sm text-gray-500 dark:text-gray-300">Edit user Availability settings</p>
+            </div>
+
+            <form wire:submit.prevent="createAvailability">
+                @csrf
+                <div class=" m-1 p-2  grid grid-cols-1 md:grid-cols-3">
+                    <div class="">
+                        <label for="available_date">Available Date</label>
+                        <input type="date" name="available_date" id="available_date" wire:model="available_date">
+                        @error('available_date')
+                            <span class="text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="">
+                        <label for="available_time">Available Time</label><br>
+                        <input type="time" name="available_time" id="available_time" wire:model="available_time">
+                        @error('available_time')
+                            <span class="text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    {{-- </div> --}}
+                    <div class=" mt-4 ">
+
+                        <button type="submit"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create
+                            Availability</button>
+                    </div>
+            </form>
         </div>
+    @endif
 
-
-        <form wire:submit.prevent="createAvailability">
-            @csrf
-            <div class=" m-1 p-2  grid grid-cols-1 md:grid-cols-3">
-                <div class="">
-                    <label for="available_date">Available Date</label>
-                    <input type="date" name="available_date" id="available_date" wire:model="available_date">
-                    @error('available_date')
-                        <span class="text-red-500">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="">
-                    <label for="available_time">Available Time</label><br>
-                    <input type="time" name="available_time" id="available_time" wire:model="available_time">
-                    @error('available_time')
-                        <span class="text-red-500">{{ $message }}</span>
-                    @enderror
-                </div>
-                {{-- </div> --}}
-                <div class=" mt-4 ">
-
-                    <button type="submit"
-                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create
-                        Availability</button>
-                </div>
-        </form>
-    </div>
 </div>

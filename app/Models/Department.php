@@ -14,6 +14,6 @@ class Department extends Model
     ];
     public function doctors()
     {
-        return $this->hasMany(Doctor::class);
+        return $this->hasManyThrough(Doctor::class, DoctorDepartment::class, 'department_id', 'id', 'id', 'doctor_id');
     }
 }
