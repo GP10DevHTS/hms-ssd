@@ -42,7 +42,7 @@
                         @livewire('users.profile-settings-page', ['user' => $user->id], key('users-profile-settings-page'))
                     @elseif (request()->routeIs('users.appointments'))
                         @if ($isPatient)
-                            @livewire('patients.patient-appointment-tab', ['user' => $user->id])
+                            @livewire('patients.patient-appointment-tab', ['patient' => $user->patient->id])
                             {{-- @elseif ($isDoctor) --}}
                         @endif
                     @elseif (request()->routeIs('patient.clinical-records', ['user' => $user->id]))

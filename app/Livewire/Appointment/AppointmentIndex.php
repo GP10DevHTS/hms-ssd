@@ -23,7 +23,12 @@ class AppointmentIndex extends Component
     }
 
     public function assignSelf($appointment_id){
-        Appointment::where('id',$appointment_id)->update(['doctor_id' => auth()->user()->id]);
+        Appointment::where('id',$appointment_id)->update(['doctor_id' => auth()->user()->id,'status'=>1]);
         noty()->addSuccess('Appointment assigned');
+    }
+
+    public function completeAppointment($appointment_id){
+        Appointment::where('id',$appointment_id)->update(['status' => 3, 'deleted_at' => now()]);
+        noty()->addSuccess('Saved as Complete');
     }
 }

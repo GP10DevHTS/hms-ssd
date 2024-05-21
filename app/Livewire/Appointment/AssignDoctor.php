@@ -31,6 +31,7 @@ class AssignDoctor extends Component
 
     public function assignDoctor(){
         $this->appointment->doctor_id = $this->doctor_id;
+        $this->appointment->status = 1;
         $this->appointment->save();
         noty()->addSuccess('Doctor assigned');
         $this->closeAssignDoctorModal();
