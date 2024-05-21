@@ -55,7 +55,7 @@
             </form>
         </div>
     </div>
-    @if (\App\Models\Doctor::where('user_id', auth()->user()->id)->exists())
+    @if (\App\Models\Doctor::where('user_id', $user->id)->exists())
         <div class="mb-4">
             <div
                 class="flex justify-between items-center  p-2 border m-2 bg-gray-100 dark:bg-gray-800 shadow-md rounded-md mt-6">

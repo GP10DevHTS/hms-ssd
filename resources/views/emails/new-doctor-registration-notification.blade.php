@@ -1,7 +1,7 @@
 <x-mail::message>
 Greetings!
 
-We are delighted to extend an invitation for you to join the HMS-SSD system as a Doctor. Welcome aboard!
+We are delighted to extend an invitation for you to join the Parieng Hospital system as a Doctor. Welcome aboard!
 
 To accept the invitation and set up your account, simply click the button below:
 
@@ -17,7 +17,7 @@ Your default password is:
 If you were not expecting this invitation or think it is a mistake, you can disregard this email.
 
 Regards,
-The HMS-SSD Team
+The Parieng Hospital Team
 
 
 </x-mail::message>

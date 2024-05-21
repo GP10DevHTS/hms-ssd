@@ -77,12 +77,12 @@ class EditProfileModel extends Component
         $this->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'phone' => 'sometimes|nullable|digits:10',
+            'phone' => 'sometimes|nullable|string|min:10|max:20',
             'gender' => 'required|in:male,female,other',
             'address' => 'required|string|max:255',
             'dob' => 'required|date',
             'photo' => 'nullable|mimes:jpg,jpeg,png',
-            'blood_group' => 'nullable|string|max:255',
+            // 'blood_group' => 'nullable|string|max:255',
         ]);
 
         if ($this->photo) {

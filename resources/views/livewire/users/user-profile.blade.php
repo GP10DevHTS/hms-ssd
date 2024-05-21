@@ -20,12 +20,36 @@
                 </div>
                 <div>
                     @if (request()->routeIs('users.profile'))
-                        Profile
+                        {{-- Profile --}}
                         @if ($isPatient)
                             @livewire('patients.blood-group-details', ['patient' => $user->patient->id], key('patient-blood-group'))
+                            ------------------------ <br>
+                            cureently in room / ward? -> allow medical officer to add/change <br>
+                            ---> record shall trigger new movement and reflected here if not soft deleted <br>
+                            ------------------------ <br>
+                            allergies -> allow medical officer to add <br>
+                            ---------------------- <br>
+                            disease records -> allow medical officer to add <br>
+                            ------------------------ <br>
+                            surgery history -> allow medical officer to add <br>
+                            ---------------------- <br>
+                            transfusion history -> allow medical officer to add <br>
+                            ---------------------- <br>
+                        @elseif($isDoctor)
+                            @livewire('doctors.view-doctor-availability', ['doctor' => $user->doctor->id], key('doctor-avaiability-slots'))
                         @endif
                     @elseif (request()->routeIs('users.profile.settings'))
                         @livewire('users.profile-settings-page', ['user' => $user->id], key('users-profile-settings-page'))
+                    @elseif (request()->routeIs('users.appointments'))
+                        @if ($isPatient)
+                            @livewire('patients.patient-appointment-tab', ['user' => $user->id])
+                            {{-- @elseif ($isDoctor) --}}
+                        @endif
+                    @elseif (request()->routeIs('patient.clinical-records', ['user' => $user->id]))
+                        @livewire('patients.clinical-record-tab', ['user' => $user->id], key('users-profile-settings-page'))
+                    @elseif (request()->routeIs('patient.movements'))
+                        @livewire('patients.movements-tab', ['user' => $user->id], key('users-profile-settings-page'))
+
                     @endif
                 </div>
             </div>

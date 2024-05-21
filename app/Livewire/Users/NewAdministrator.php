@@ -22,7 +22,7 @@ class NewAdministrator extends Component
     #[Validate('required|in:male,female,other')]
     public $gender;
 
-    #[Validate('required|digits:10')]
+    #[Validate('sometimes|nullable|string|min:10|max:20')]
     public $phone;
 
     #[Validate('required|string|min:3')]

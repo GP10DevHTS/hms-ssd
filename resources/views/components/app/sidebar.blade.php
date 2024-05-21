@@ -116,73 +116,91 @@
                     </li>
 
                     {{-- user management --}}
-                    <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 @if (in_array(Request::segment(1), ['users'])) {{ 'bg-slate-900' }} @endif"
-                        x-data="{ open: {{ in_array(Request::segment(1), ['users']) ? 1 : 0 }} }">
-                        <a class="block text-slate-200 hover:text-white truncate transition duration-150 @if (in_array(Request::segment(1), ['users'])) {{ 'hover:text-slate-200' }} @endif"
-                            href="#0" @click.prevent="sidebarExpanded ? open = !open : sidebarExpanded = true">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
-                                        <path
-                                            d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4" />
-                                    </svg>
-                                    <span
-                                        class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">User
-                                        Management</span>
+                    @canany(['create-users', 'edit-users', 'delete-users', 'view-users', 'view-roles', 'create-roles',
+                        'edit-roles', 'delete-roles', 'create-patients', 'edit-patients', 'delete-patients',
+                        'view-patients', 'change-patient-bloodgroup', 'create-doctors', 'edit-doctors', 'delete-doctors',
+                        'view-doctors'])
+                        <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 @if (in_array(Request::segment(1), ['users'])) {{ 'bg-slate-900' }} @endif"
+                            x-data="{ open: {{ in_array(Request::segment(1), ['users']) ? 1 : 0 }} }">
+                            <a class="block text-slate-200 hover:text-white truncate transition duration-150 @if (in_array(Request::segment(1), ['users'])) {{ 'hover:text-slate-200' }} @endif"
+                                href="#0" @click.prevent="sidebarExpanded ? open = !open : sidebarExpanded = true">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
+                                            <path
+                                                d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4" />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">User
+                                            Management</span>
+                                    </div>
+                                    <!-- Icon -->
+                                    <div
+                                        class="flex shrink-0 ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                        <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 @if (in_array(Request::segment(1), ['users'])) {{ 'rotate-180' }} @endif"
+                                            :class="open ? 'rotate-180' : 'rotate-0'" viewBox="0 0 12 12">
+                                            <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                                        </svg>
+                                    </div>
                                 </div>
-                                <!-- Icon -->
-                                <div
-                                    class="flex shrink-0 ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                    <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 @if (in_array(Request::segment(1), ['users'])) {{ 'rotate-180' }} @endif"
-                                        :class="open ? 'rotate-180' : 'rotate-0'" viewBox="0 0 12 12">
-                                        <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </a>
-                        <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
-                            <ul class="pl-9 mt-1 @if (!in_array(Request::segment(1), ['users'])) {{ 'hidden' }} @endif"
-                                :class="open ? '!block' : 'hidden'">
+                            </a>
+                            <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                                <ul class="pl-9 mt-1 @if (!in_array(Request::segment(1), ['users'])) {{ 'hidden' }} @endif"
+                                    :class="open ? '!block' : 'hidden'">
+                                    @can('view-roles')
+                                        <li class="mb-1 last:mb-0">
+                                            <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('users.roles')) {{ '!text-indigo-500' }} @endif"
+                                                href="{{ route('users.roles') }}">
+                                                <span
+                                                    class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Roles</span>
+                                            </a>
+                                        </li>
+                                    @endcan
+                                    @can('view-users')
+                                        <li class="mb-1 last:mb-0">
+                                            <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('users.index')) {{ '!text-indigo-500' }} @endif"
+                                                href="{{ route('users.index') }}">
+                                                <span
+                                                    class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Administrators</span>
+                                            </a>
+                                        </li>
+                                    @endcan
 
-                                <li class="mb-1 last:mb-0">
-                                    <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('users.roles')) {{ '!text-indigo-500' }} @endif"
-                                        href="{{ route('users.roles') }}">
-                                        <span
-                                            class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Roles</span>
-                                    </a>
-                                </li>
-                                <li class="mb-1 last:mb-0">
-                                    <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('users.index')) {{ '!text-indigo-500' }} @endif"
-                                        href="{{ route('users.index') }}">
-                                        <span
-                                            class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Administrators</span>
-                                    </a>
-                                </li>
-                                <li class="mb-1 last:mb-0">
-                                    <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('users.doctors')) {{ '!text-indigo-500' }} @endif"
-                                        href="{{ route('users.doctors') }}">
-                                        <span
-                                            class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Doctors</span>
-                                    </a>
-                                </li>
-                                <li class="mb-1 last:mb-0">
-                                    <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('users.patients')) {{ '!text-indigo-500' }} @endif"
-                                        href="{{ route('users.patients') }}">
-                                        <span
-                                            class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Patients</span>
-                                    </a>
-                                </li>
-                                <li class="mb-1 last:mb-0">
-                                    <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('users.departments.list')) {{ '!text-indigo-500' }} @endif"
-                                        href="{{ route('users.departments.list') }}">
-                                        <span
-                                            class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Departments</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+                                    @can('view-doctors')
+                                        <li class="mb-1 last:mb-0">
+                                            <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('users.doctors')) {{ '!text-indigo-500' }} @endif"
+                                                href="{{ route('users.doctors') }}">
+                                                <span
+                                                    class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Doctors</span>
+                                            </a>
+                                        </li>
+                                    @endcan
+
+                                    @can('view-patients')
+                                        <li class="mb-1 last:mb-0">
+                                            <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('users.patients')) {{ '!text-indigo-500' }} @endif"
+                                                href="{{ route('users.patients') }}">
+                                                <span
+                                                    class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Patients</span>
+                                            </a>
+                                        </li>
+                                    @endcan
+
+                                    @can('view-departments')
+                                        <li class="mb-1 last:mb-0">
+                                            <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('users.departments.list')) {{ '!text-indigo-500' }} @endif"
+                                                href="{{ route('users.departments.list') }}">
+                                                <span
+                                                    class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Departments</span>
+                                            </a>
+                                        </li>
+                                    @endcan
+
+                                </ul>
+                            </div>
+                        </li>
+                    @endcanany
 
                     {{-- Appointment Management --}}
                     <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 @if (in_array(Request::segment(1), ['appointments'])) {{ 'bg-slate-900' }} @endif"

@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             DashboardTableSeeder::class,
             BloodGroupsSeeder::class,
             PatientPermissionsSeeder::class,
-            DoctorPermissionsSeeder::class
+            DoctorPermissionsSeeder::class,
+            departmentPermissions::class,
         ]);
     }
 }

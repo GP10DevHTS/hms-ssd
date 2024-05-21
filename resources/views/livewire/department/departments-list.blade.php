@@ -4,7 +4,11 @@
         <div class="">
             <p class="text-lg font-semibold text-gray-800 dark:text-gray-100">Departments</p>
         </div>
-        @livewire('department.new-department-modal')
+        @can('edit-departments')
+            @livewire('department.new-department-modal')
+        @endcan
     </div>
-    @livewire('department.departments-list-cards')
+    @can('view-departments')
+        @livewire('department.departments-list-cards')
+    @endcan
 </div>
