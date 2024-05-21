@@ -13,6 +13,7 @@ use App\Livewire\Appointment\AppointmentSlots;
 use App\Livewire\Department\DepartmentsList;
 use App\Livewire\Department\NewDepartmentModal;
 use App\Livewire\Appointment\AppointmentIndex;
+use App\Livewire\Facilities\RoomsWards;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,15 +38,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/users/roles', RolesComponent::class)->name('users.roles');
     Route::get('/users/list', ListOfAllAdmin::class)->name('users.index');
     Route::get('/users/doctors', ListOfAllDoctors::class)->name('users.doctors');
-    Route::get('/users/patients', ListOfAllPatients::class)->name('users.patients');
     Route::get('/user/{user}', UserProfile::class)->name('users.profile');
     Route::get('/user/{user}/settings', UserProfile::class)->name('users.profile.settings');
-    Route::get('/user/{user}/appointments', UserProfile::class)->name('users.appointments');
 
     // patient tabs
-    Route::get('/user/{user}/clinical-records', UserProfile::class)->name('patient.clinical-records');
-    Route::get('/user/{user}/movements', UserProfile::class)->name('patient.movements');
-
+    Route::get('/patients/patients', ListOfAllPatients::class)->name('users.patients');
+    Route::get('/patients/{user}/clinical-records', UserProfile::class)->name('patient.clinical-records');
+    Route::get('/patients/{user}/movements', UserProfile::class)->name('patient.movements');
+    Route::get('/patients/{user}/appointments', UserProfile::class)->name('users.appointments');
 
     // Appointment Routes
     Route::get('/appointments/new', AppointmentNew::class)->name('appointments.new');
@@ -56,8 +56,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     // Route::get('/appointments/departments', AppointmentIndex::class)->name('appointments.departments');
 
     // Department Routes
-    Route::get('/users/departments/list', DepartmentsList::class)->name('users.departments.list');
-    Route::get('/users/departments/new', NewDepartmentModal::class)->name('users.departments.new');
+    Route::get('/facilities/departments/list', DepartmentsList::class)->name('users.departments.list');
+    Route::get('/facilities/rooms-and-wards', RoomsWards::class)->name('facilities.rooms-n-wards');
+    // Route::get('/facilities/departments/new', NewDepartmentModal::class)->name('users.departments.new');
     
     Route::fallback(function () {
         return view('pages/utility/404');
