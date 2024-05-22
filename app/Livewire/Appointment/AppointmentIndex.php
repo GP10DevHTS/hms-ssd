@@ -25,7 +25,7 @@ class AppointmentIndex extends Component
     }
 
     public function assignSelf($appointment_id){
-        Appointment::where('id',$appointment_id)->update(['doctor_id' => auth()->user()->id,'status'=>1]);
+        Appointment::where('id',$appointment_id)->update(['doctor_id' => auth()->user()->doctor->id,'status'=>1]);
         noty()->addSuccess('Appointment assigned');
     }
 

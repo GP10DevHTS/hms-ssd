@@ -50,7 +50,7 @@
                     @elseif (request()->routeIs('patient.clinical-records', ['user' => $user->id]))
                         @livewire('patients.clinical-record-tab', ['user' => $user->id], key('users-profile-settings-page'))
                     @elseif (request()->routeIs('patient.movements'))
-                        @livewire('patients.movements-tab', ['user' => $user->id], key('users-profile-settings-page'))
+                        @livewire('patients.movements-tab',  ['patient' => $user->patient->id], key('users-profile-settings-page'))
 
                     @endif
                 </div>

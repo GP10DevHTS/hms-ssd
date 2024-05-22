@@ -26,6 +26,7 @@ class NewDepartmentModal extends Component
             'department_description' => $validatedData['department_description'],
         ]);
         noty()->addSuccess('Department created successfully');
+        $this->reset(['department_name','department_description']);
         $this->newDepartmentModal_isOpen = false;
     }
     public function render()

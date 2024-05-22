@@ -1,4 +1,7 @@
 <div>
     {{-- The best athlete wants his opponent at his best. --}}
-    patient movements
+    @livewire('patients.new-movement-modal', ['patientId' => $patient->id])
+
+    @livewire('patients.movement-history-modal', ['patientId' => $patient->id])
+
 </div>
