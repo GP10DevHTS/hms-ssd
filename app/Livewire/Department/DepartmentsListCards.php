@@ -9,6 +9,7 @@ class DepartmentsListCards extends Component
 {
     public function render()
     {
+        abort_if(!auth()->user()->can('view-departments'),403);
         return view('livewire.department.departments-list-cards',[
             'departments' => Department::all()
         ]);

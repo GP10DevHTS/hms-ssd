@@ -29,7 +29,13 @@
                     {{-- <p class=" px-2  font-medium text-purple-900  ">{{ $user->phone_number_two ?? '' }}</p> --}}
                 </div>
                 <div class="px-6 py-4">
-                    @livewire('users.edit-profile-model', ['user' => $user->id], key('edit-profile-modal'))
+                    @if ($user->doctor && auth()->user()->can('edit-doctors'))
+                        @livewire('users.edit-profile-model', ['user' => $user->id], key('edit-profile-modal'))
+                    @elseif ($user->patient && auth()->user()->can('edit-patients'))
+                        @livewire('users.edit-profile-model', ['user' => $user->id], key('edit-profile-modal'))
+                    @elseif (auth()->user()->can('edit-users'))
+                        @livewire('users.edit-profile-model', ['user' => $user->id], key('edit-profile-modal'))
+                    @endif
                 </div>
             </div>
 

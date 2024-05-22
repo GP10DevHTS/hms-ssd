@@ -3,11 +3,9 @@
 
     <div class="overflow-x-auto p-4">
 
-
         <div class="py-4 px-4 flex justify-between  border-b border-slate-200 dark:border-slate-700">
             <h1 class="text-2xl font-semibold text-slate-800 dark:text-slate-200">Patients</h1>
             <div class="flex justify-end">
-
 
                 <div class="relative">
                     <input type="text" wire:model.live="search"
@@ -36,16 +34,15 @@
                         <option value="100">100</option>
                     </select>
                 </div>
+                @can('create-patients')
+                    <div class="mr-4">
+                        {{-- new user --}}
+                        @livewire('users.new-patient', [], key('new-patient-modal'))
+                    </div>
+                @endcan
 
-                <div class="mr-4">
-                    {{-- new user --}}
-                    @livewire('users.new-patient', [], key('new-patient-modal'))
-                </div>
             </div>
         </div>
-
-
-
 
         <div>
             @if (count($selectedUsers))
@@ -126,12 +123,10 @@
                             @endif
                         </td>
 
-
-
                         <td class="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <div class="grid grid-cols-2 gap-2">
 
-                                @can('view-users')
+                                @can('view-patients')
                                     <x-button wire:loading.attr="disabled"
                                         wire:target="openUserProfile({{ $user->id }})"
                                         wire:click="openUserProfile({{ $user->id }})"

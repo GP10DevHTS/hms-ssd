@@ -36,7 +36,9 @@
                             transfusion history -> allow medical officer to add <br>
                             ---------------------- <br>
                         @elseif($isDoctor)
-                            @livewire('doctors.view-doctor-availability', ['doctor' => $user->doctor->id], key('doctor-avaiability-slots'))
+                            @can('view-doctor-availability')
+                                @livewire('doctors.view-doctor-availability', ['doctor' => $user->doctor->id], key('doctor-avaiability-slots'))
+                            @endcan
                         @endif
                     @elseif (request()->routeIs('users.profile.settings'))
                         @livewire('users.profile-settings-page', ['user' => $user->id], key('users-profile-settings-page'))

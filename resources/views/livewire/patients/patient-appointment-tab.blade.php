@@ -10,7 +10,7 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2  gap-4">
-        @foreach ($appointments as $appointment)
+        @forelse ($appointments as $appointment)
             <div wire:key="appointment-{{ $appointment->id }}" class="bg-white p-4 rounded-lg shadow-md">
                 {{-- <h2 class="text-lg font-bold mb-2">{{ $appointment->patient->user->name }}</h2> --}}
                 <p class="text-gray-700"><strong>Department:</strong>
@@ -57,6 +57,8 @@
                 @endif
 
             </div>
-        @endforeach
+        @empty
+            <p>No appointments to show</p>
+        @endforelse
     </div>
 </div>

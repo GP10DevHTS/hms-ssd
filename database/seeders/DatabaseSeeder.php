@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
             DoctorPermissionsSeeder::class,
             departmentPermissions::class,
             appointmentPermissions::class,
+            DoctorAvailabilityPermissions::class,
+            MoreAppointmentPermissions::class,
         ]);
     }
 }

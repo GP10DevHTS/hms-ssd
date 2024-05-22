@@ -46,6 +46,7 @@ class AppointmentNew extends Component
     public $appointment_slot;
     public $useNewpatient;
     public $bookAppointmentModal_isOpen = false;
+    public $canMakeForOthers = true;
 
     protected $rules = [
         'patient_id' => 'required|exists:patients,id',
@@ -61,13 +62,18 @@ class AppointmentNew extends Component
     ];
 
     public function mount(){
-        //
+        if(auth()->user()->patient){
+            $this->patient_id = auth()->user()->patient->id;
+            $this->canMakeForOthers = false;
+        }
     }
     public function bookAppointment(){
         $this->bookAppointmentModal_isOpen = true;
     }
     public function render()
     {
+        abort_if(!auth()->user()->can('create-appointment'),403);
+
         return view('livewire.appointment.appointment-new',[
             'departments' => Department::all(),
             'patients' => Patient::all(),

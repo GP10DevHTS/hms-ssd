@@ -20,6 +20,14 @@ class UserProfile extends Component
     }
     public function render()
     {
+        if ($this->isDoctor) {
+            if(!auth()->user()->can('view-doctors')) abort(403);
+        } elseif($this->isPatient) {
+            if(!auth()->user()->can('view-patients')) abort(403);
+        } else{
+            if(!auth()->user()->can('view-users')) abort(403);
+        }
+        
         return view('livewire.users.user-profile');
     }
 }

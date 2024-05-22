@@ -13,6 +13,8 @@ class AppointmentIndex extends Component
 
     public function render()
     {
+        abort_if(!auth()->user()->can('view-appointments'),403);
+
         return view('livewire.appointment.appointment-index',[
             'departments' => Department::all(),
             'appointments' =>  Appointment::when($this->selectedDepartment != '', function ($query) {
