@@ -28,7 +28,7 @@
             </button>
         </div>
     @endif
-
+    <div class="p-6 bg-white rounded-lg shadow-md">
     {{-- <h3 class="text-lg font-semibold mt-6">Treatments</h3> --}}
     <div class="overflow-x-auto">
         <table class="table-auto w-full border border-gray-200 rounded">
@@ -53,5 +53,6 @@
                 @endforelse
             </tbody>
         </table>
+    </div>
     </div>
 </div>

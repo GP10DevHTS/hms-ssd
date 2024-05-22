@@ -29,14 +29,31 @@
         </div>
     @endif
 
-    <h3 class="text-lg font-semibold mt-6">Lab Tests</h3>
-    <ul>
-        @forelse ($labTests as $test)
-            <li class="py-2 border-b border-gray-200">
-                <span class="block text-sm">{{ $test->name }} - {{ $test->result }}</span>
-            </li>
-        @empty
-            <li class="py-2">No lab tests available.</li>
-        @endforelse
-    </ul>
+    <div class="p-6 bg-white rounded-lg shadow-md">
+        {{-- <h2 class="text-xl font-semibold mb-4">Lab Tests</h2> --}}
+    
+        <div class="overflow-x-auto">
+            <table class="table-auto w-full border border-gray-200 rounded">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="px-4 py-2 text-left">Test Name</th>
+                        <th class="px-4 py-2 text-left">Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($labTests as $test)
+                        <tr class="border-b border-gray-200">
+                            <td class="px-4 py-2">{{ $test->name }}</td>
+                            <td class="px-4 py-2">{{ $test->result }}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="2" class="px-4 py-2 text-center text-gray-500">No lab tests available.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
 </div>

@@ -1,5 +1,5 @@
 <div class="p-6 bg-white rounded-lg shadow-md">
-    <h2 class="text-xl font-semibold mb-4">Diagnoses for Patient ID: {{ $patientId }}</h2>
+    <h2 class="text-xl font-semibold mb-4">Diagnoses </h2>
 
     <form wire:submit.prevent="saveDiagnosis" class="mb-4">
         <div class="mb-4">
@@ -29,19 +29,32 @@
         </div>
     @endif
 
-    <h3 class="text-lg font-semibold mt-6">Diagnoses</h3>
-    <ul>
-        @forelse ($diagnoses as $diagnosis)
-            <li class="py-2 border-b border-gray-200">
-                <span class="block text-sm">{{ $diagnosis->description }}</span>
-                <span class="block text-xs text-gray-500">(Added on: {{ $diagnosis->created_at->format('M d, Y') }})</span>
-                @if($diagnosis->doctor_diagnosis)
-                    <span class="block text-sm">{{ $diagnosis->doctor_diagnosis }}</span>
-                    <span class="block text-xs text-gray-500">(Added on: {{ $diagnosis->created_at->format('M d, Y') }})</span>
-                @endif
-            </li>
-        @empty
-            <li class="py-2">No diagnoses available.</li>
-        @endforelse
-    </ul>
+    <div class="p-6 bg-white rounded-lg shadow-md">
+        {{-- <h2 class="text-xl font-semibold mb-4">Diagnoses</h2> --}}
+    
+        <div class="overflow-x-auto">
+            <table class="table-auto w-full border border-gray-200 rounded">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="px-4 py-2 text-left">Diagnosis Description</th>
+                        <th class="px-4 py-2 text-left">Doctor's Diagnosis</th>
+                        <th class="px-4 py-2 text-left">Added On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($diagnoses as $diagnosis)
+                        <tr class="border-b border-gray-200">
+                            <td class="px-4 py-2">{{ $diagnosis->description }}</td>
+                            <td class="px-4 py-2">{{ $diagnosis->doctor_diagnosis ?? 'N/A' }}</td>
+                            <td class="px-4 py-2 text-gray-500 text-sm">{{ $diagnosis->created_at->format('M d, Y') }}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="3" class="px-4 py-2 text-center text-gray-500">No diagnoses available.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

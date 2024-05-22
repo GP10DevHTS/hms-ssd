@@ -1,5 +1,5 @@
 <div class="p-6 bg-white rounded-lg shadow-md">
-    <h2 class="text-xl font-semibold mb-4">Symptoms for Patient ID: {{ $patientId }}</h2>
+    <h2 class="text-xl font-semibold mb-4">Symptoms</h2>
 
     <form wire:submit.prevent="saveSymptom" class="mb-4">
         <div class="flex">
@@ -21,12 +21,33 @@
         </div>
     @endif
 
-    <ul>
-        @foreach ($symptoms as $symptom)
-            <li class="py-2 border-b border-gray-200">
-                <span class="block">{{ $symptom->description }}</span>
-                <span class="text-gray-500 text-sm">(Added on: {{ $symptom->created_at->format('M d, Y') }})</span>
-            </li>
-        @endforeach
-    </ul>
+    <div class="p-6 bg-white rounded-lg shadow-md">
+        {{-- <h2 class="text-xl font-semibold mb-4">Symptoms</h2> --}}
+    
+        <div>
+            @if ($symptoms->count() > 0)
+                <div class="overflow-x-auto">
+                    <table class="table-auto w-full border border-gray-200 rounded">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="px-4 py-2 text-left">Description</th>
+                                <th class="px-4 py-2 text-left">Added On</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($symptoms as $symptom)
+                                <tr class="border-b border-gray-200">
+                                    <td class="px-4 py-2">{{ $symptom->description }}</td>
+                                    <td class="px-4 py-2 text-gray-500 text-sm">{{ $symptom->created_at->format('M d, Y') }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                <p>No symptoms available.</p>
+            @endif
+        </div>
+    </div>
+    
 </div>
