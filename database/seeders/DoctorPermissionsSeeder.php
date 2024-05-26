@@ -20,6 +20,8 @@ class DoctorPermissionsSeeder extends Seeder
             'edit-doctors',
             'delete-doctors',
             'view-doctors',
+            'create-new-patient-disease-record',
+            'create-new-patient-allergy'
         ];
 
         // Seed the permissions

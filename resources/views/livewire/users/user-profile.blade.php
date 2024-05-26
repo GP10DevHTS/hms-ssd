@@ -35,8 +35,13 @@
                             @livewire('patients.new-allergy-modal', ['patient' => $user->patient->id], key('patient-allergies'))
                             @endcan
                            @livewire('patients.allergy-list', ['patient' => $user->patient->id], key('patient-allergy-list'))
-                            disease records -> allow medical officer to add <br>
-                            ------------------------ <br>
+                            {{-- disease records -> allow medical officer to add <br> --}}
+                            {{-- ------------------------ <br> --}}
+                            @can('create-new-patient-disease-record')
+                            @livewire('patients.new-disease-record-modal', ['patient' => $user->patient->id])
+                            @endcan
+                            @livewire('patients.list-disease-records', ['patient' => $user->patient->id])
+
                             surgery history -> allow medical officer to add <br>
                             ---------------------- <br>
                             transfusion history -> allow medical officer to add <br>
