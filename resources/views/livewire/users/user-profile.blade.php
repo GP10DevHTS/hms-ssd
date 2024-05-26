@@ -44,6 +44,11 @@
 
                             surgery history -> allow medical officer to add <br>
                             ---------------------- <br>
+                            @can('create-new-patient-surgery-history')
+                            @livewire('patients.new-surgery-history-modal', ['patient' => $user->patient->id])
+                            @endcan
+                            @livewire('patients.list-surgery-history', ['patient' => $user->patient->id])
+
                             transfusion history -> allow medical officer to add <br>
                             ---------------------- <br>
                         @elseif($isDoctor)
