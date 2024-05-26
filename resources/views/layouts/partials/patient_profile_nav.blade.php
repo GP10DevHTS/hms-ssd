@@ -11,7 +11,7 @@
         </li>
         <li class="mb-0">
             <a wire:navigate href="{{ route('patient.clinical-records', ['user' => $user->id]) }}"
-                class="block @if (Route::is('patient.clinical-records')) bg-gray-300 @endif py-2 px-4 rounded hover:bg-gray-300">Clinical Records</a>
+                class="block @if (Route::is('patient.clinical-records')) bg-gray-300 @endif @if (Route::is('patient.clinical-record.view')) bg-gray-300 @endif py-2 px-4 rounded hover:bg-gray-300">Clinical Records</a>
         </li>
         <li class="mb-0">
             <a wire:navigate href="{{ route('patient.movements', ['user' => $user->id]) }}"

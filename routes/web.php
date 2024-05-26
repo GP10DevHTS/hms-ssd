@@ -44,6 +44,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     // patient tabs
     Route::get('/patients/patients', ListOfAllPatients::class)->name('users.patients');
     Route::get('/patients/{user}/clinical-records', UserProfile::class)->name('patient.clinical-records');
+    Route::get('/patients/{user}/clinical-record/{record}', UserProfile::class)->name('patient.clinical-record.view');
     Route::get('/patients/{user}/movements', UserProfile::class)->name('patient.movements');
     Route::get('/patients/{user}/appointments', UserProfile::class)->name('users.appointments');
 
