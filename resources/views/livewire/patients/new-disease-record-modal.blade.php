@@ -1,5 +1,5 @@
 <div>
-    <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600" wire:click="newDiseaseRecordModal">Add Disease Record</a>
+    <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600" wire:click="newDiseaseRecordModal">Add</a>
 
     <x-dialog-modal wire:model="newDiseaseRecordModalIsOpen">
         <x-slot name="title">
