@@ -25,10 +25,16 @@
                             @livewire('patients.blood-group-details', ['patient' => $user->patient->id], key('patient-blood-group'))
                             ------------------------ <br>
                             cureently in room / ward? -> allow medical officer to add/change <br>
+                            @livewire('patients.currently-in-room', ['patient' => $user->patient->id], key('patient-currently-in-room'))
+                            
                             ---> record shall trigger new movement and reflected here if not soft deleted <br>
                             ------------------------ <br>
                             allergies -> allow medical officer to add <br>
-                            ---------------------- <br>
+                            ---------------------- <br
+                            @can('create-new-patient-allergy')
+                            @livewire('patients.new-allergy-modal', ['patient' => $user->patient->id], key('patient-allergies'))
+                            @endcan
+                           @livewire('patients.allergy-list', ['patient' => $user->patient->id], key('patient-allergy-list'))
                             disease records -> allow medical officer to add <br>
                             ------------------------ <br>
                             surgery history -> allow medical officer to add <br>
