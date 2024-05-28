@@ -13,6 +13,7 @@ use App\Livewire\Appointment\AppointmentSlots;
 use App\Livewire\Department\DepartmentsList;
 use App\Livewire\Department\NewDepartmentModal;
 use App\Livewire\Appointment\AppointmentIndex;
+use App\Livewire\Facilities\LabTestsPage;
 use App\Livewire\Facilities\RoomsWards;
 
 /*
@@ -44,7 +45,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     // patient tabs
     Route::get('/patients/patients', ListOfAllPatients::class)->name('users.patients');
     Route::get('/patients/{user}/clinical-records', UserProfile::class)->name('patient.clinical-records');
-    Route::get('/patients/{user}/clinical-record/{record}', UserProfile::class)->name('patient.clinical-record.view');
+    Route::get('/patients/{user}/clinical-record', UserProfile::class)->name('patient.clinical-record.view');
     Route::get('/patients/{user}/movements', UserProfile::class)->name('patient.movements');
     Route::get('/patients/{user}/appointments', UserProfile::class)->name('users.appointments');
 
@@ -59,6 +60,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     // Department Routes
     Route::get('/facilities/departments/list', DepartmentsList::class)->name('users.departments.list');
     Route::get('/facilities/rooms-and-wards', RoomsWards::class)->name('facilities.rooms-n-wards');
+    Route::get('/facilities/lab-tests', LabTestsPage::class)->name('facilities.lab-tests');
     // Route::get('/facilities/departments/new', NewDepartmentModal::class)->name('users.departments.new');
     
     Route::fallback(function () {

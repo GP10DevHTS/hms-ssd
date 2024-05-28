@@ -22,7 +22,13 @@ class ClinicalRecordsList extends Component
     public function render()
     {
         return view('livewire.patients.clinical-records-list',[
-            'clinicalRecords' => ClinicalRecord::where('patient_id', $this->patient->id)->orderBy('created_at', 'desc')->get()
+            'clinicalRecords' => ClinicalRecord::withTrashed()->where('patient_id', $this->patient->id)->orderBy('created_at', 'desc')->get()
         ]);
+    }
+
+    public function closeRecord($id){
+        ClinicalRecord::findOrFail($id)->delete();
+        noty()->addSuccess('Status Updated');
+        $this->dispatch('refreshList');
     }
 }

@@ -3,14 +3,20 @@
 namespace App\Livewire;
 
 use App\Models\Patient;
+use App\Models\PatientSymptom;
 use Livewire\Component;
 use App\Models\Symptom;
 use App\Models\User;
+use Livewire\Attributes\Url;
+use App\Models\ClinicalRecord;
 
 class Symptoms extends Component
 {
+    #[Url()]
+    public $record;
     public $patientId;
     public $description;
+    public $clinicalRecord;
 
     protected $rules = [
         'description' => 'required|string|max:255',
@@ -19,15 +25,19 @@ class Symptoms extends Component
     public function mount($user)
     {
         $this->patientId = User::find($user)->id;
+        $this->clinicalRecord = ClinicalRecord::withTrashed()->find($this->record);
+
     }
 
     public function saveSymptom()
     {
         $this->validate();
 
-        Symptom::create([
-            'patient_id' => $this->patientId,
+        PatientSymptom::create([
+            // 'patient_id' => $this->patientId,
             'description' => $this->description,
+            'created_by' => auth()->user()->id,
+            'clinical_record_id' => $this->record,
         ]);
 
         $this->description = '';
@@ -37,7 +47,7 @@ class Symptoms extends Component
 
     public function render()
     {
-        $symptoms = Symptom::where('patient_id', $this->patientId)->get();
+        $symptoms = PatientSymptom::where('clinical_record_id', $this->record)->get();
         return view('livewire.symptoms',
             [
                 'symptoms' => $symptoms

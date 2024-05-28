@@ -16,12 +16,12 @@
                         <p class="mt-2 text-gray-600">Opened At:
                             {{ $record->created_at->format('d M Y') . ' at ' . $record->created_at->format('h:i A') }}
                         </p>
-                        <a href="{{ route('patient.clinical-record.view', ['user' => $patient->user->id,'record' => $record->id]) }}"
+                        <a href="{{ route('patient.clinical-record.view', ['user' => $patient->user->id, 'record' => $record->id]) }}"
                             class="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200">Details</a>
                         @if (is_null($record->deleted_at))
-                            <a href="#"
-                                class="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200">Close
-                                File</a>
+                            <x-button wire:confirm="are you sure?" class="mt-4" wire:click="closeRecord({{ $record->id }})">
+                                Close File
+                            </x-button>
                         @else
                             <p class="mt-4 text-red-600">Closed At:
                                 {{ $record->deleted_at->format('d M Y') . ' at ' . $record->deleted_at->format('h:i A') }}

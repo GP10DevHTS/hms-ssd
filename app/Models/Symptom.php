@@ -11,7 +11,8 @@ class Symptom extends Model
     use HasFactory;
     protected $fillable = [
         'patient_id',
-        'description'];
+        'description'
+    ];
 
     public function patient()
     {

@@ -1,7 +1,7 @@
-<div>
+<div wire:poll>
     {{-- Room List --}}
     <div class="mb-4">
-        <x-input type="text" placeholder="Search rooms..." class="block w-full" wire:model="searchTerm" />
+        <x-input type="text" placeholder="Search rooms..." class="block w-full" wire:model.live.debounce="searchTerm" />
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

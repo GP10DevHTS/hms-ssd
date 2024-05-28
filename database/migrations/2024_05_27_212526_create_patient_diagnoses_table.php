@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lab_tests', function (Blueprint $table) {
+        Schema::create('patient_diagnoses', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('patient_id')->constrained();
-            $table->string('name');
-            // $table->string('result')->nullable();
+            $table->foreignId('clinical_record_id')->constrained();
+            $table->foreignId('doctor_id')->constrained();
+            $table->string('description');
+            $table->string('doctor_diagnosis');
+            $table->timestamp('diagnosis_date');
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lab_tests');
+        Schema::dropIfExists('patient_diagnoses');
     }
 };

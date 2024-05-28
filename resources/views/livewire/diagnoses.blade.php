@@ -3,6 +3,17 @@
 
     <form wire:submit.prevent="saveDiagnosis" class="mb-4">
         <div class="mb-4">
+            <label for="doctor_id" class="block text-sm font-medium text-gray-700">Doctor:</label>
+            {{-- <textarea id="doctor_id" class="form-textarea mt-1 block w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 @error('description') border-red-500 @enderror" name="description" required wire:model.defer="description"></textarea> --}}
+            <select wire:model="doctor_id" class="form-select block w-full mt-1">
+                <option value="">Select a doctor</option>
+                @foreach ($doctors as $doctor)
+                    <option value="{{ $doctor->id }}">{{ $doctor->user->name }}</option>
+                @endforeach
+            </select>
+            @error('doctor_id') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
+        </div>
+        <div class="mb-4">
             <label for="description" class="block text-sm font-medium text-gray-700">Diagnosis Description:</label>
             <textarea id="description" class="form-textarea mt-1 block w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 @error('description') border-red-500 @enderror" name="description" required wire:model.defer="description"></textarea>
             @error('description') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
@@ -38,6 +49,7 @@
                     <tr>
                         <th class="px-4 py-2 text-left">Diagnosis Description</th>
                         <th class="px-4 py-2 text-left">Doctor's Diagnosis</th>
+                        <th class="px-4 py-2 text-left">Doctor</th>
                         <th class="px-4 py-2 text-left">Added On</th>
                     </tr>
                 </thead>
@@ -46,6 +58,7 @@
                         <tr class="border-b border-gray-200">
                             <td class="px-4 py-2">{{ $diagnosis->description }}</td>
                             <td class="px-4 py-2">{{ $diagnosis->doctor_diagnosis ?? 'N/A' }}</td>
+                            <td class="px-4 py-2">{{ $diagnosis->doctor ? $diagnosis->doctor->user->name : 'N/A' }}</td>
                             <td class="px-4 py-2 text-gray-500 text-sm">{{ $diagnosis->created_at->format('M d, Y') }}</td>
                         </tr>
                     @empty

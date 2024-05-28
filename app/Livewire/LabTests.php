@@ -4,32 +4,38 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\LabTest;
+use App\Models\PatientLabTest;
 use App\Models\User;
+use Livewire\Attributes\Url;
+use App\Models\ClinicalRecord;
 
 class LabTests extends Component
 {
     public $patientId;
-    public $name;
-    public $result;
+    #[Url()]
+    public $record;
+    public $lab_test_id;
+    public $clinicalRecord;
 
     protected $rules = [
-        'name' => 'required|string|max:255',
-        'result' => 'required|string|max:255',
+        'lab_test_id' => 'required|exists:lab_tests,id',
+        // 'result' => 'required|string|max:255',
     ];
 
     public function mount($user)
     {
         $this->patientId = User::find($user)->id;
+        $this->clinicalRecord = ClinicalRecord::withTrashed()->find($this->record);
     }
 
     public function saveLabTest()
     {
         $this->validate();
 
-        LabTest::create([
-            'patient_id' => $this->patientId,
-            'name' => $this->name,
-            'result' => $this->result,
+        PatientLabTest::create([
+            'clinical_record_id' => $this->record,
+            'lab_test_id' => $this->lab_test_id,
+            'created_by' => auth()->user()->id,
         ]);
 
         $this->resetInputFields();
@@ -39,12 +45,12 @@ class LabTests extends Component
 
     private function resetInputFields()
     {
-        $this->name = '';
-        $this->result = '';
+        $this->lab_test_id = '';
+        // $this->result = '';
     }
     public function render()
     {
-        $labTests = LabTest::where('patient_id', $this->patientId)->get();
+        $labTests = LabTest::get();
         return view('livewire.lab-tests', compact('labTests'));
     }
 }

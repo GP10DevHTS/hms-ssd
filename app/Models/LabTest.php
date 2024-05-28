@@ -9,12 +9,8 @@ class LabTest extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'patient_id',
+        // 'patient_id',
         'name',
-        'result',
     ];
-    public function patient()
-    {
-        return $this->belongsTo(Patient::class, 'patient_id');
-    }
+   
 }

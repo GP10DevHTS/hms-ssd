@@ -4,15 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Complaint extends Model
+class PatientSymptom extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
-        'clinical_record_id',
-        'doctor_id',
-        'rating',
         'description',
+        'clinical_record_id',
+        'created_by',
     ];
 }

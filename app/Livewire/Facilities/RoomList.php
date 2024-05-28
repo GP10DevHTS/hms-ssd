@@ -12,8 +12,7 @@ class RoomList extends Component
     
     public function render()
     {
-        $rooms = Room::with('ward')
-            ->when($this->searchTerm, function ($query) {
+        $rooms = Room::when($this->searchTerm, function ($query) {
                 return $query->where('name', 'like', '%' . $this->searchTerm . '%');
             })
             ->get();
