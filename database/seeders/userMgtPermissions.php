@@ -51,5 +51,8 @@ class userMgtPermissions extends Seeder
         if ($user) {
             $user->assignRole($role);
         }
+
+        Role::create(['name' => 'doctor']);
+        Role::create(['name' => 'patient']);
     }
 }

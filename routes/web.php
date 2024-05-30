@@ -13,6 +13,7 @@ use App\Livewire\Appointment\AppointmentSlots;
 use App\Livewire\Department\DepartmentsList;
 use App\Livewire\Department\NewDepartmentModal;
 use App\Livewire\Appointment\AppointmentIndex;
+use App\Livewire\Attendance\AttandanceManagement;
 use App\Livewire\Facilities\LabTestsPage;
 use App\Livewire\Facilities\RoomsWards;
 
@@ -62,6 +63,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/facilities/rooms-and-wards', RoomsWards::class)->name('facilities.rooms-n-wards');
     Route::get('/facilities/lab-tests', LabTestsPage::class)->name('facilities.lab-tests');
     // Route::get('/facilities/departments/new', NewDepartmentModal::class)->name('users.departments.new');
+
+    Route::get('/attendances', AttandanceManagement::class)->name('attandances.index');
     
     Route::fallback(function () {
         return view('pages/utility/404');

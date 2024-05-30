@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Illuminate\Support\Facades\Mail;
+use Livewire\WithPagination;
 
 class NewPatient extends Component
 {
+    use WithPagination;
 
     public $newDoctorModal_isOpen = false;
 

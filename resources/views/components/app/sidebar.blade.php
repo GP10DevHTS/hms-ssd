@@ -20,7 +20,7 @@
                 </svg>
             </button>
             <!-- Logo -->
-            <a class="block" href="{{ route('dashboard') }}">
+            <a class="block" wire:navigate href="{{ route('dashboard') }}">
                 <svg width="32" height="32" viewBox="0 0 32 32">
                     <defs>
                         <linearGradient x1="28.538%" y1="20.229%" x2="100%" y2="108.156%" id="logo-a">
@@ -57,10 +57,10 @@
                 </h3>
                 <ul class="mt-3">
                     <!-- Dashboard -->
-                    <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 @if (in_array(Request::segment(1), ['dashboard'])) {{ 'bg-slate-900' }} @endif"
-                        x-data="{ open: {{ in_array(Request::segment(1), ['dashboard']) ? 1 : 0 }} }">
+                    <li
+                        class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 @if (in_array(Request::segment(1), ['dashboard'])) {{ 'bg-slate-900' }} @endif">
                         <a class="block text-slate-200 hover:text-white truncate transition duration-150 @if (in_array(Request::segment(1), ['dashboard'])) {{ 'hover:text-slate-200' }} @endif"
-                            href="#0" @click.prevent="sidebarExpanded ? open = !open : sidebarExpanded = true">
+                            wire:navigate href="{{ route('dashboard') }}">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
@@ -78,21 +78,21 @@
                                         class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Dashboard</span>
                                 </div>
                                 <!-- Icon -->
-                                <div
+                                {{-- <div
                                     class="flex shrink-0 ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
                                     <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 @if (in_array(Request::segment(1), ['dashboard'])) {{ 'rotate-180' }} @endif"
                                         :class="open ? 'rotate-180' : 'rotate-0'" viewBox="0 0 12 12">
                                         <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
                                     </svg>
-                                </div>
+                                </div> --}}
                             </div>
                         </a>
-                        <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                        {{-- <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
                             <ul class="pl-9 mt-1 @if (!in_array(Request::segment(1), ['dashboard'])) {{ 'hidden' }} @endif"
                                 :class="open ? '!block' : 'hidden'">
                                 <li class="mb-1 last:mb-0">
                                     <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('dashboard')) {{ '!text-indigo-500' }} @endif"
-                                        href="{{ route('dashboard') }}">
+                                        wire:navigate href="{{ route('dashboard') }}">
                                         <span
                                             class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Main</span>
                                     </a>
@@ -112,7 +112,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </div>
+                        </div> --}}
                     </li>
 
                     {{-- user management --}}
@@ -150,7 +150,7 @@
                                     @can('view-roles')
                                         <li class="mb-1 last:mb-0">
                                             <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('users.roles')) {{ '!text-indigo-500' }} @endif"
-                                                href="{{ route('users.roles') }}">
+                                                wire:navigate href="{{ route('users.roles') }}">
                                                 <span
                                                     class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Roles</span>
                                             </a>
@@ -159,7 +159,7 @@
                                     @can('view-users')
                                         <li class="mb-1 last:mb-0">
                                             <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('users.index')) {{ '!text-indigo-500' }} @endif"
-                                                href="{{ route('users.index') }}">
+                                                wire:navigate href="{{ route('users.index') }}">
                                                 <span
                                                     class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Administrators</span>
                                             </a>
@@ -169,7 +169,7 @@
                                     @can('view-doctors')
                                         <li class="mb-1 last:mb-0">
                                             <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('users.doctors')) {{ '!text-indigo-500' }} @endif"
-                                                href="{{ route('users.doctors') }}">
+                                                wire:navigate href="{{ route('users.doctors') }}">
                                                 <span
                                                     class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Doctors</span>
                                             </a>
@@ -179,7 +179,7 @@
                                     @can('view-patients')
                                         <li class="mb-1 last:mb-0">
                                             <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('users.patients')) {{ '!text-indigo-500' }} @endif"
-                                                href="{{ route('users.patients') }}">
+                                                wire:navigate href="{{ route('users.patients') }}">
                                                 <span
                                                     class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Patients</span>
                                             </a>
@@ -196,7 +196,7 @@
                         <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 @if (in_array(Request::segment(1), ['patients'])) {{ 'bg-slate-900' }} @endif"
                             {{-- x-data="{ open: {{ in_array(Request::segment(1), ['patients']) ? 1 : 0 }} }" --}}>
                             <a class="block text-slate-200 hover:text-white truncate transition duration-150 @if (in_array(Request::segment(1), ['patients'])) {{ 'hover:text-slate-200' }} @endif"
-                                href="{{ route('users.patients') }}" {{-- @click.prevent="sidebarExpanded ? open = !open : sidebarExpanded = true" --}}>
+                                wire:navigate href="{{ route('users.patients') }}" {{-- @click.prevent="sidebarExpanded ? open = !open : sidebarExpanded = true" --}}>
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -223,7 +223,7 @@
                                     @can('view-patients')
                                         <li class="mb-1 last:mb-0">
                                             <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('users.patients')) {{ '!text-indigo-500' }} @endif"
-                                                href="{{ route('users.patients') }}">
+                                                wire:navigate href="{{ route('users.patients') }}">
                                                 <span
                                                     class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Patients</span>
                                             </a>
@@ -273,18 +273,18 @@
                             <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
                                 <ul class="pl-9 mt-1 @if (!in_array(Request::segment(1), ['appointments'])) {{ 'hidden' }} @endif"
                                     :class="open ? '!block' : 'hidden'">
-                                    <li class="mb-1 last:mb-0">
+                                    {{-- <li class="mb-1 last:mb-0">
                                         <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('appointments.available_slots')) {{ '!text-indigo-500' }} @endif"
-                                            href="{{ route('appointments.available_slots') }}">
+                                            wire:navigate href="{{ route('appointments.available_slots') }}">
                                             <span
                                                 class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Available
                                                 Slots</span>
                                         </a>
-                                    </li>
+                                    </li> --}}
                                     @can('create-appointment')
                                         <li class="mb-1 last:mb-0">
                                             <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('appointments.new')) {{ '!text-indigo-500' }} @endif"
-                                                href="{{ route('appointments.new') }}">
+                                                wire:navigate href="{{ route('appointments.new') }}">
                                                 <span
                                                     class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">New
                                                     Appointment</span>
@@ -295,7 +295,7 @@
                                     @can('view-appointments')
                                         <li class="mb-1 last:mb-0">
                                             <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('appointments.list')) {{ '!text-indigo-500' }} @endif"
-                                                href="{{ route('appointments.list') }}">
+                                                wire:navigate href="{{ route('appointments.list') }}">
                                                 <span
                                                     class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Apointments</span>
                                             </a>
@@ -348,7 +348,7 @@
                                     @can('view-departments')
                                         <li class="mb-1 last:mb-0">
                                             <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('users.departments.list')) {{ '!text-indigo-500' }} @endif"
-                                                href="{{ route('users.departments.list') }}">
+                                                wire:navigate href="{{ route('users.departments.list') }}">
                                                 <span
                                                     class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Departments</span>
                                             </a>
@@ -357,7 +357,7 @@
                                     @canany(['view-rooms', 'view-wards'])
                                         <li class="mb-1 last:mb-0">
                                             <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('facilities.rooms-n-wards')) {{ '!text-indigo-500' }} @endif"
-                                                href="{{ route('facilities.rooms-n-wards') }}">
+                                                wire:navigate href="{{ route('facilities.rooms-n-wards') }}">
                                                 <span
                                                     class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Rooms
                                                     & Wards</span>
@@ -367,9 +367,10 @@
 
                                     <li class="mb-1 last:mb-0">
                                         <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('facilities.lab-tests')) {{ '!text-indigo-500' }} @endif"
-                                            href="{{ route('facilities.lab-tests') }}">
+                                            wire:navigate href="{{ route('facilities.lab-tests') }}">
                                             <span
-                                                class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Lab Tests</span>
+                                                class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Lab
+                                                Tests</span>
                                         </a>
                                     </li>
 
@@ -379,6 +380,56 @@
                         </li>
                     @endcanany
 
+                    {{-- hr/attendances --}}
+                    <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 @if (in_array(Request::segment(1), ['attendances'])) {{ 'bg-slate-900' }} @endif"
+                        x-data="{ open: {{ in_array(Request::segment(1), ['attendances']) ? 1 : 0 }} }">
+                        <a class="block text-slate-200 hover:text-white truncate transition duration-150 @if (in_array(Request::segment(1), ['attendances'])) {{ 'hover:text-slate-200' }} @endif"
+                            href="#0" @click.prevent="sidebarExpanded ? open = !open : sidebarExpanded = true">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        aria-hidden="true" role="img" width="16" height="16"
+                                        preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                                        <g fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="4" width="18" height="18" rx="2"
+                                                ry="2" />
+                                            <line x1="16" y1="2" x2="16" y2="6" />
+                                            <line x1="8" y1="2" x2="8" y2="6" />
+                                            <line x1="3" y1="10" x2="21" y2="10" />
+                                            <path d="M9 14l2 2l4-4" />
+                                        </g>
+                                    </svg>
+
+                                    <span
+                                        class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Attendances</span>
+                                </div>
+                                <!-- Icon -->
+                                <div
+                                    class="flex shrink-0 ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                    <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 @if (in_array(Request::segment(1), ['attendances'])) {{ 'rotate-180' }} @endif"
+                                        :class="open ? 'rotate-180' : 'rotate-0'" viewBox="0 0 12 12">
+                                        <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                            <ul class="pl-9 mt-1 @if (!in_array(Request::segment(1), ['attendances'])) {{ 'hidden' }} @endif"
+                                :class="open ? '!block' : 'hidden'">
+
+                                <li class="mb-1 last:mb-0">
+                                    <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('attandances.index')) {{ '!text-indigo-500' }} @endif"
+                                        wire:navigate href="{{ route('attandances.index') }}">
+                                        <span
+                                            class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Attendances</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </li>
                 </ul>
             </div>
 
