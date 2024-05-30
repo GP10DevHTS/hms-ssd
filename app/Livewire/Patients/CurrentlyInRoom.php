@@ -10,7 +10,7 @@ use App\Models\PatientMovement;
 class CurrentlyInRoom extends Component
 {
     public $patient_id;
-    public $room;
+    public $patientMovement;
 
     public function mount($patient)
     {
@@ -20,9 +20,9 @@ class CurrentlyInRoom extends Component
     {
         // find the patient currently in the room
         $patient = Patient::findOrFail($this->patient_id);
-        $this->room = PatientMovement::where('patient_id', $patient->id)
+        $this->patientMovement = PatientMovement::where('patient_id', $patient->id)
                                      ->whereNull('moved_out_at')
                                      ->first();
-        return view('livewire.patients.currently-in-room', ['room' => $this->room]);
+        return view('livewire.patients.currently-in-room', ['patientMovement' => $this->patientMovement]);
     }
 }
