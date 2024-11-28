@@ -17,6 +17,7 @@ class AttandanceManagement extends Component
 
 
     public function mount() {
+        abort_if(!auth()->user()->can('view-hr-attendance'), 403);
         $this->endDate = Carbon::today()->addDay();
         $this->startDate = $this->endDate->copy()->subDays(9); // Last 10 days including today
         for ($date = $this->startDate; $date->lte($this->endDate); $date->addDay()) {

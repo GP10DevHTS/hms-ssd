@@ -4,10 +4,13 @@ namespace App\Livewire\Users;
 
 use App\Models\Patient;
 use App\Models\User;
+use Livewire\WithPagination;
 use Livewire\Component;
 
 class ListOfAllPatients extends Component
 {
+    use WithPagination;
+
     public $search = '';
     public $perPage = 10;
     public $orderBy = 'id';
